@@ -1,4 +1,4 @@
--- *************** CREATING TABLE TO EXPORT DATA ******************
+-- *************** CREATING TABLE TO IMPORT DATA ******************
 
 
 -- CREATE TABLE covid_deaths (
@@ -30,7 +30,7 @@
 --     weekly_hosp_admissions_per_million  NUMERIC
 -- );
 
--- ******************** ADJUSTING DATA FORMATING ***************************
+-- ******************** ADJUSTING DATE FORMATTING ***************************
 -- ALTER DATABASE "PortfolioProject" SET datestyle = 'ISO, DMY';
 
 
@@ -75,7 +75,7 @@
 -- );
 
 
--- ******************** CHECKING AND TESTS ***************************
+-- ******************** CHECKS AND TESTS ***************************
 
 select * from covid_deaths
 order by 3,4;
@@ -84,7 +84,7 @@ order by 3,4;
 -- order by 3,4;
 
 
--- ******************** SELECTING THE DATA THAT WILL BE USED IN THE PROJECT ***************************
+-- ******************** SELECTING THE DATA TO BE USED IN THE PROJECT ***************************
 
 SELECT 
 	Location,
@@ -98,7 +98,7 @@ ORDER BY 1, 2;
 
 
 -- ******************** TOTAL CASES vs TOTAL DEATHS ***************************
--- ******************** SHOWS LIKELIHOOD OF DYING IF YOU CONTRACT COVID IN YOUR COUNTRY ***************************
+-- ******************** SHOWS THE LIKELIHOOD OF DYING IF YOU CONTRACT COVID IN YOUR COUNTRY ***************************
 
 SELECT 
 	Location,
@@ -112,7 +112,7 @@ ORDER BY 1, 2;
 
 
 -- ******************** TOTAL CASES vs TOTAL POPULATION ***************************
--- ******************** SHOWS THE PERCENTAGE OF THE POPULATION CONTRACT COVID ***************************
+-- ******************** SHOWS THE PERCENTAGE OF THE POPULATION THAT CONTRACTED COVID ***************************
 
 SELECT 
 	Location,
@@ -125,7 +125,7 @@ FROM covid_deaths
 ORDER BY 1, 2;
 
 
--- ******************** SHOWS COUNTRIES WITH THE HIGHEST INFECTION RATE COMPARE TO POPULATION ***************************
+-- ******************** SHOWS COUNTRIES WITH THE HIGHEST INFECTION RATE COMPARED TO POPULATION ***************************
 
 WITH data_1 AS(
 	WITH data AS(
@@ -166,7 +166,7 @@ WHERE total_death_count IS NOT NULL
 ORDER BY total_death_count DESC;
 
 
--- ******************** BREAKING BY CONTINENTS ***************************
+-- ******************** BREAKING DOWN BY CONTINENT ***************************
 -- ******************** SHOWS CONTINENTS WITH THE HIGHEST DEATH COUNT PER POPULATION ***************************
 
 WITH data AS(
