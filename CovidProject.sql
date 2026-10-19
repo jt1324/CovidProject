@@ -77,7 +77,6 @@
 
 -- ******************** CHECKING AND TESTS ***************************
 
-
 select * from covid_deaths
 order by 3,4;
 
@@ -106,7 +105,7 @@ SELECT
 	date,
 	total_cases,
 	total_deaths,
-	(total_deaths / total_cases)*100 AS death_percentage
+	ROUND((total_deaths / total_cases)*100, 2) AS death_percentage
 FROM covid_deaths
 -- WHERE Location ilike '%states%'
 ORDER BY 1, 2;
@@ -120,7 +119,7 @@ SELECT
 	date,
 	population,
 	total_cases,
-	(total_cases / population)*100 AS cases_percentage
+	ROUND((total_cases / population)*100, 2) AS cases_percentage
 FROM covid_deaths
 -- WHERE Location ilike '%kingd%'
 ORDER BY 1, 2;
@@ -135,15 +134,15 @@ WITH data_1 AS(
 			date,
 			population,
 			total_cases,
-			(total_cases / population)*100 AS cases_percentage
+			ROUND((total_cases / population)*100, 2) AS cases_percentage
 		FROM covid_deaths
 		ORDER BY 1, 2)
-		SELECT
-			Location,
-			MAX (cases_percentage) AS percent
-		FROM data
-		GROUP BY Location
-		)
+	SELECT
+		Location,
+		MAX (cases_percentage) AS percent
+	FROM data
+	GROUP BY Location
+	)
 SELECT 
 	* 
 FROM data_1
@@ -167,8 +166,8 @@ WHERE total_death_count IS NOT NULL
 ORDER BY total_death_count DESC;
 
 
--- ******************** BREAKING BY CONTINETS ***************************
--- ******************** SHOWS CONTINETS WITH THE HIGHEST DEATH COUNT PER POPULATION ***************************
+-- ******************** BREAKING BY CONTINENTS ***************************
+-- ******************** SHOWS CONTINENTS WITH THE HIGHEST DEATH COUNT PER POPULATION ***************************
 
 WITH data AS(
 	SELECT 
@@ -190,7 +189,7 @@ SELECT
 	date,
 	SUM(new_cases) AS new_c,
 	SUM(new_deaths)AS deaths,
-	SUM(new_deaths) / SUM(new_cases)*100 AS death_percentage
+	ROUND(SUM(new_deaths) / SUM(new_cases)*100, 2) AS death_percentage
 FROM covid_deaths
 WHERE continent IS NOT NULL
 GROUP BY date
@@ -226,11 +225,11 @@ FROM data;
 DROP TABLE IF EXISTS PercentPopulationVaccination;
 CREATE TABLE PercentPopulationVaccination
 (
-continent VARCHAR(255),
-location VARCHAR(255),
-date DATE,
-population NUMERIC,
-new_vaccinations NUMERIC,
+continent 				  VARCHAR(255),
+location 				  VARCHAR(255),
+date 					  DATE,
+population 				  NUMERIC,
+new_vaccinations 		  NUMERIC,
 rolling_people_vaccinated NUMERIC
 );
 
